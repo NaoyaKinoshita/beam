@@ -21,6 +21,7 @@ def run():
             {'name': 'Tomato', 'season': 1588291200},     # May, 2020
             {'name': 'Potato', 'season': 1598918400},     # September, 2020
             {'name': 'WaterMelon', 'season': 1585709200}, # April, 2020
+            {'name': 'Cherry', 'season': 1585809200}, # April, 2020
         ])
         | 'With timestamps' >> beam.Map(
             lambda plant: beam.window.TimestampedValue(plant, plant['season']))
