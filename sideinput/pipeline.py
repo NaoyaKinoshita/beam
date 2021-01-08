@@ -5,11 +5,14 @@ from apache_beam import pvalue
 class FilterMeanLengthFn(beam.DoFn):
     """平均以上の文字数を持つ文字列をフィルタリングする."""
 
-    def __init__(self):
+    def __init__(self, num):
+        print ('---init---')
+        print (num)
         pass
 
     # mean_word_length は副入力
     def process(self, element, mean_word_length):
+        print ('---process---')
         print (element)
         if len(element) >= mean_word_length:
             yield element
@@ -32,7 +35,7 @@ def run():
     output = \
     (p
         | 'Create' >> beam.Create(inputs)
-        | 'FilterMeanLength' >> beam.ParDo(FilterMeanLengthFn(), mean_word_length=pvalue.AsSingleton(mean_word_length))
+        | 'FilterMeanLength' >> beam.ParDo(FilterMeanLengthFn(11), mean_word_length=pvalue.AsSingleton(mean_word_length))
         | 'write to text' >> beam.io.WriteToText('output.txt')
     )
 

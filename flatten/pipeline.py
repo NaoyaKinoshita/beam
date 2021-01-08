@@ -21,6 +21,7 @@ class AddTag(beam.DoFn):
 
         yield pvalue.TaggedOutput(tag, element)
 
+
 def run():
     p = beam.Pipeline(options=PipelineOptions())
 
@@ -28,6 +29,7 @@ def run():
         | 'ReadFromText' >> beam.io.ReadFromText('input.txt')
         | 'AddTag' >> beam.ParDo(AddTag()).with_outputs()
     )
+
 
     ((check_result.n, check_result.o)
         | beam.Flatten()
